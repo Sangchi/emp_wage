@@ -1,20 +1,21 @@
 const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
-
+const WORKING_DAYS = 20;
 
 function getWorkHours(attendance) {
     switch (attendance) {
         case 0: 
-            return 0; 
+            return 0;
         case 1: 
-            return PART_TIME_HOURS; 
+            return PART_TIME_HOURS;
         case 2: 
-            return FULL_TIME_HOURS; 
+            return FULL_TIME_HOURS;
         default:
-            return 0; 
+            return 0;
     }
 }
+
 
 
 function calculateRandomDailyWage() {
@@ -57,17 +58,46 @@ dailyWages.forEach((wage, index) => {
     console.log(`Employee ${index + 1} Daily Wage: $${wage}`);
 });
 
+
+
+
+function calculateDailyWage() {
+    const attendance = Math.floor(Math.random() * 3); 
+    const hoursWorked = getWorkHours(attendance);
+    const dailyWage = hoursWorked * WAGE_PER_HOUR;
+    return dailyWage;
+}
+
+
+function calculateMonthlyWage() {
+    let totalMonthlyWage = 0;
+
+    for (let day = 0; day < WORKING_DAYS; day++) {
+        totalMonthlyWage += calculateDailyWage();
+    }
+
+    return totalMonthlyWage;
+}
+
+const monthlyWage = calculateMonthlyWage();
+console.log(`Monthly Wage: $${monthlyWage}`);
+
+
 /*
 output-
-Random Daily Wage: $160
-Employee 1: present
+Random Daily Wage: $80
+Employee 1: absent
 Employee 2: absent
 Employee 3: present
-Employee 4: present
-Employee 5: absent
-Employee 1 Daily Wage: $160
+Employee 4: absent
+Employee 5: present
+Employee 1 Daily Wage: $0
 Employee 2 Daily Wage: $0
 Employee 3 Daily Wage: $160
-Employee 4 Daily Wage: $160
-Employee 5 Daily Wage: $0
+Employee 4 Daily Wage: $0
+Employee 5 Daily Wage: $80
+Monthly Wage: $1120
+
 */
+
+
